@@ -1,5 +1,7 @@
 ﻿using RockPaperScissorsGame.SRC;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using RockPaperScissorsGame.SRC.Interface;
 
 namespace RockPaperScissorsGame
 {
@@ -8,7 +10,13 @@ namespace RockPaperScissorsGame
         static void Main(string[] args)
         {
             Console.WriteLine("Game started...........");
-            Game game = new Game();
+            var serviceProvider = new ServiceCollection()
+            .AddScoped<IPlayer, Player>()
+            .AddSingleton<IGame, Game>()
+            .AddSingleton<IUtil, Util>()
+            .BuildServiceProvider();
+
+            var game= serviceProvider.GetService<IGame>();
             game.StartGame();
             Console.WriteLine("Game Exit...............");
         }

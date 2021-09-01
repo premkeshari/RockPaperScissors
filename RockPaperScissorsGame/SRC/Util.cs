@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RockPaperScissorsGame.SRC.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsGame.SRC
 {
-    public class Util
+    public class Util: IUtil
     {
         public string GreetOpponent()
         {
@@ -17,7 +18,7 @@ namespace RockPaperScissorsGame.SRC
             return name;
         }
 
-        public void StartGameMessage(Player player)
+        public void StartGameMessage(IPlayer player)
         {
             Console.WriteLine($"{player.Name} ,let's Play!\n");
         }

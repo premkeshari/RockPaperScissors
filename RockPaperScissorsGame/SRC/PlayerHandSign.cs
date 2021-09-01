@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RockPaperScissorsGame.SRC.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,10 +28,13 @@ namespace RockPaperScissorsGame.SRC
             switch (userChoice.ToUpper())
             {
                 case "P":
+                    Console.WriteLine($"You chose : {Move.Paper}");
                     return new PlayerHandSign(Move.Paper);
                 case "S":
+                    Console.WriteLine($"You chose : {Move.Scissors}");
                     return new PlayerHandSign(Move.Scissors);
                 case "R":
+                    Console.WriteLine($"You chose : {Move.Rock}");
                     return new PlayerHandSign(Move.Rock);
             }
             return null;
@@ -42,16 +46,21 @@ namespace RockPaperScissorsGame.SRC
         public static PlayerHandSign MapRandomToMove()
         {
             Random random = new Random();
-            int cpuChoice = random.Next(0, 2);
+            int cpuChoice = random.Next(1, 4);
 
             switch (cpuChoice)
             {
-                case 0:
-                    return new PlayerHandSign(Move.Rock);
                 case 1:
-                    return new PlayerHandSign(Move.Paper);
+                    Console.WriteLine($"Computer chose : {Move.Rock}");
+                    return new PlayerHandSign(Move.Rock);
                 case 2:
+                    Console.WriteLine($"Computer chose : {Move.Paper}");
+                    return new PlayerHandSign(Move.Paper);
+                case 3:
+                    Console.WriteLine($"Computer chose : {Move.Scissors}");
                     return new PlayerHandSign(Move.Scissors);
+                default:
+                    break;
             }
             return null;
         }
@@ -73,18 +82,14 @@ namespace RockPaperScissorsGame.SRC
                     return Move.Rock;
             }
         }
-
-        public static string PlayerMove(Player player)
-        {
-           return Convert.ToString(player.HandSign.move);            
-        }
+      
         /// <summary>
         /// Gets the winner.
         /// </summary>
         /// <returns>The winner.</returns>
         /// <param name="player1">Handsign player1.</param>
         /// <param name="player2">Handsign player2.</param>
-        public static string GetWinner(Player player1, Player player2)
+        public static string GetWinner(IPlayer player1, IPlayer player2)
         {
             if (GetWinningMove(player1.HandSign.move).Equals(player2.HandSign.move))
             {
