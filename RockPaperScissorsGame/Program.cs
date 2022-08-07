@@ -20,6 +20,7 @@ namespace RockPaperScissorsGame
             game.StartGame();
             Console.WriteLine("Game Exit...............");
 
+            Console.ReadKey();
 
 
 
